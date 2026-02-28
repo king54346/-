@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+    android:layout_height="match_parent">
+
+    <!-- 背景图 -->
+    <ImageView
+        android:id="@+id/iv_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
+    <!-- 数字人渲染层 -->
+    <ai.guiji.duix.sdk.client.render.DUIXTextureView
+        android:id="@+id/glTextureView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Debug 信息（顶部） -->
+    <TextView
+        android:id="@+id/tvDebug"
+        android:textSize="12sp"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        android:background="#66000000"
+        android:padding="6dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
+
+    <!-- 静音开关（右上角） -->
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchMute"
+        android:text="@string/mute"
+        android:layout_margin="12dp"
+        android:enabled="false"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- 动作列表标题（左上角） -->
+    <TextView
+        android:id="@+id/tvMotionTips"
+        android:visibility="invisible"
+        android:layout_margin="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/support_actions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMotion"
+        app:layout_constraintTop_toBottomOf="@+id/tvMotionTips"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="12dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnRandomMotion"
+        android:text="@string/random_play_action"
+        android:textSize="13sp"
+        android:visibility="invisible"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/rvMotion"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/shape_common_btn"
+        android:layout_margin="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- ════════════════════════════════════════
+         底部区域（从下往上依次排列）
+         ════════════════════════════════════════ -->
+
+    <!-- 最底部提示文字 -->
+    <TextView
+        android:id="@+id/tvAITips"
+        android:text="@string/ai_tips"
+        android:textSize="13sp"
+        android:textColor="@color/white"
+        android:shadowColor="#1a1e1f"
+        android:shadowRadius="5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- 录音按钮（主操作，紧贴底部提示上方） -->
+    <Button
+        android:id="@+id/btnRecord"
+        android:text="@string/record"
+        android:enabled="false"
+        android:visibility="invisible"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:background="@drawable/shape_common_btn"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvAITips"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="52dp"/>
+
+    <!-- AI 状态提示（识别中/思考中/合成中，位于录音按钮上方） -->
+    <TextView
+        android:id="@+id/tvAIStatus"
+        android:visibility="gone"
+        android:textSize="13sp"
+        android:textColor="@color/white"
+        android:background="#99000000"
+        android:padding="8dp"
+        android:gravity="center"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="4dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/btnRecord"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- 演示按钮区（位于状态栏上方，次要操作） -->
+    <Button
+        android:id="@+id/btnPlayPCM"
+        android:text="@string/play_pcm"
+        android:background="@drawable/shape_common_btn"
+        android:layout_marginHorizontal="6dp"
+        android:layout_marginBottom="4dp"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+        android:enabled="false"
+        app:layout_constraintBottom_toTopOf="@+id/tvAIStatus"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnPlayWAV"
+        android:text="@string/play_wav"
+        android:background="@drawable/shape_common_btn"
+        android:layout_marginHorizontal="6dp"
+        android:layout_marginBottom="4dp"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+        android:enabled="false"
+        app:layout_constraintBottom_toTopOf="@+id/btnPlayPCM"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnStopPlay"
+        android:text="@string/play_stop"
+        android:paddingHorizontal="12dp"
+        android:background="@drawable/shape_common_btn"
+        android:layout_margin="6dp"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+        android:enabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnPlayWAV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
